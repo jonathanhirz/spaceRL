@@ -1,0 +1,26 @@
+{
+  project : {
+    name : 'spaceRL',
+    version : '0.0.1',
+    author : 'Jonathan Hirz',
+
+    app : {
+      name : 'spaceRL',
+      package : 'com.jonathanhirz.spaceRL'
+    },
+
+    build : {
+      dependencies : {
+        luxe : '*',
+      },
+      hxcpp : {
+        flags : ['-nocolor']
+      }
+    },
+
+    files : {
+      config : 'config.json',
+      assets : 'assets/'
+    }
+  }
+}
