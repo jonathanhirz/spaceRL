@@ -1,6 +1,8 @@
 package states;
 import luxe.States;
 
+import entity.Ship;
+
 class GameState extends State {
 
     public function new( _name:String ) {
@@ -13,6 +15,8 @@ class GameState extends State {
     } //init
 
     override function onenter<T>( _value:T ) {
+
+        var ship = new Ship();
 
 
     } //onenter

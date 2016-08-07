@@ -1,0 +1,14 @@
+{
+    "fire" : {
+        "frame_size" : { "x" : "16", "y" : "32" },
+        "frameset" : ["1-4"],
+        "loop" : "true",
+        "speed" : "30"
+    },
+    "idle" : {
+        "frame_size" : { "x" : "16", "y" : "32" },
+        "frameset" : ["5"],
+        "loop" : "true",
+        "speed" : "1"
+    }
+}
