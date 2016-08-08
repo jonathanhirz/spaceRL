@@ -2,10 +2,13 @@ package component;
 
 import luxe.Component;
 import luxe.Sprite;
+import luxe.Input;
+
+import entity.Ship;
 
 class Controls extends Component {
 
-    var attached_entity : Sprite;
+    var attached_entity : Ship;
 
     override function init() {
 
@@ -13,7 +16,7 @@ class Controls extends Component {
 
     } //init
 
-    override function update(dt:Float) {
+    override function update( dt:Float ) {
 
         //todo: touch controls, and such
 

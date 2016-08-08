@@ -1,5 +1,8 @@
 package states;
 import luxe.States;
+import luxe.Color;
+import luxe.Parcel;
+import luxe.ParcelProgress;
 
 import entity.Ship;
 
@@ -11,12 +14,38 @@ class GameState extends State {
 
     override function init() {
 
+        // parcel to load our assets for the game_state
+        var parcel = new Parcel({
+            textures : [
+                { id : 'assets/blue_ship.png' },
+                { id : 'assets/exhaust.png' },
+                { id : 'assets/star_background.png' },
+                { id : 'assets/star_background_back.png' },
+                { id : 'assets/movement_touch_icon.png' }
+             ],
+             jsons : [
+                { id : 'assets/exhaust.json'}
+            ]
+        });
+
+        new ParcelProgress({
+            parcel : parcel,
+            background : new Color().rgb(0x1a1a1a),
+            oncomplete : assets_loaded
+        });
+
+        parcel.load();
+
 
     } //init
 
-    override function onenter<T>( _value:T ) {
+    function assets_loaded(_) {
 
         var ship = new Ship();
+
+    } //assets_loaded
+
+    override function onenter<T>( _value:T ) {
 
 
     } //onenter

@@ -3,9 +3,11 @@ package component;
 import luxe.Component;
 import luxe.Sprite;
 
+import entity.Ship;
+
 class ScrollingBackground extends Component {
 
-    var attached_entity : Sprite;
+    var attached_entity : Ship;
 
     override function init() {
 
@@ -14,7 +16,7 @@ class ScrollingBackground extends Component {
 
     } //init
 
-    override function update(dt:Float) {
+    override function update( dt:Float ) {
 
         //todo: move background with attached_entity
 

@@ -20,9 +20,6 @@ class Main extends luxe.Game {
 
         config.window.title = config.user.window.title;
 
-        //todo: look into parcel loading
-        config.preload.textures.push({ id:'assets/blue_ship.png' });
-
         return config;
 
     } //config
