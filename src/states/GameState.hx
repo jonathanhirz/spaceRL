@@ -61,7 +61,7 @@ class GameState extends State {
     override function update( dt:Float ) {
 
         if(ship != null) {
-            Luxe.camera.center.weighted_average_xy(ship.pos.x, ship.pos.y, 5);
+            Luxe.camera.center.weighted_average_xy(ship.pos.x, ship.pos.y, 1);
         }
 
     } //update
