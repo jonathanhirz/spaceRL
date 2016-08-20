@@ -8,6 +8,8 @@ import entity.Ship;
 
 class GameState extends State {
 
+    var ship : Ship;
+
     public function new( _name:String ) {
         super({ name:_name });
     } //new
@@ -28,6 +30,7 @@ class GameState extends State {
             ]
         });
 
+        //todo: make ParcelProgress look custom
         new ParcelProgress({
             parcel : parcel,
             background : new Color().rgb(0x1a1a1a),
@@ -41,7 +44,7 @@ class GameState extends State {
 
     function assets_loaded(_) {
 
-        var ship = new Ship();
+        ship = new Ship();
 
     } //assets_loaded
 
@@ -57,6 +60,9 @@ class GameState extends State {
 
     override function update( dt:Float ) {
 
+        if(ship != null) {
+            Luxe.camera.center.weighted_average_xy(ship.pos.x, ship.pos.y, 5);
+        }
 
     } //update
 

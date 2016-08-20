@@ -10,8 +10,8 @@ import component.ScrollingBackground;
 
 class Ship extends Sprite {
 
-    var velocity : Vector = new Vector(0,0);
-    var acceleration : Vector = new Vector(0,0);
+    public var velocity : Vector = new Vector(0,0);
+    public var acceleration : Vector = new Vector(0,0);
 
     var max_velocity : Float = 10;
     var movement_rate : Float = 1.5;
@@ -31,6 +31,41 @@ class Ship extends Sprite {
         // add components
         add(new Controls());
         add(new ScrollingBackground());
+
+        create_exhaust_animations();
+
+    } //new
+
+    override function update( dt:Float ) {
+
+        velocity.add(acceleration);
+        velocity.x = luxe.utils.Maths.clamp(velocity.x, -max_velocity, max_velocity);
+        velocity.y = luxe.utils.Maths.clamp(velocity.y, -max_velocity, max_velocity);
+        pos.add(velocity);
+        velocity.multiply(new Vector(0.99, 0.99));
+        if(velocity.x != 0 || velocity.y != 0) {
+            this.rotation_z = Math.atan2(velocity.y, velocity.x) * (180/Math.PI) + 90;
+        }
+
+    } //update
+
+    public function start_exhaust() {
+
+        if(ship_exhaust_anim.animation != 'fire') {
+            ship_exhaust_anim.animation = 'fire';
+            ship_exhaust_anim_2.animation = 'fire';
+        }
+
+    } //start_exhaust
+
+    public function stop_exhaust() {
+
+        ship_exhaust_anim.animation = 'idle';
+        ship_exhaust_anim_2.animation = 'idle';
+
+    } //stop_exhaust
+
+    function create_exhaust_animations() {
 
         // exhaust animation
         // exhaust 1 sprite
@@ -67,35 +102,6 @@ class Ship extends Sprite {
         ship_exhaust_anim_2.animation = 'idle';
         ship_exhaust_anim_2.play();
 
-    } //new
-
-    override function update( dt:Float ) {
-
-        velocity.add(acceleration);
-        velocity.x = luxe.utils.Maths.clamp(velocity.x, -max_velocity, max_velocity);
-        velocity.y = luxe.utils.Maths.clamp(velocity.y, -max_velocity, max_velocity);
-        pos.add(velocity);
-        velocity.multiply(new Vector(0.99, 0.99));
-        if(velocity.x != 0 || velocity.y != 0) {
-            this.rotation_z = Math.atan2(velocity.y, velocity.x) * (180/Math.PI) + 90;
-        }
-
-    } //update
-
-    public function start_exhaust() {
-
-        if(ship_exhaust_anim.animation != 'fire') {
-            ship_exhaust_anim.animation = 'fire';
-            ship_exhaust_anim_2.animation = 'fire';
-        }
-
-    } //start_exhaust
-
-    public function stop_exhaust() {
-
-        ship_exhaust_anim.animation = 'idle';
-        ship_exhaust_anim_2.animation = 'idle';
-
-    } //stop_exhaust
+    } //create_exhaust_animations
 
 } //Ship
