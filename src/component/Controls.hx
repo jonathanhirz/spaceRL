@@ -10,18 +10,42 @@ import entity.Ship;
 class Controls extends Component {
 
     var attached_entity : Ship;
-    var touches : Array<TouchEvent>;
     var ship_speed : Float = 1.5;
+
+    var touches : Array<TouchEvent>;
+    var movement_touch : TouchEvent;
+    var movement_touch_initial_position : Vector = new Vector(0,0);
 
     override function init() {
 
         attached_entity = cast entity;
+        touches = [];
 
     } //init
 
     override function update( dt:Float ) {
 
-        //todo: touch controls, and such
+        //====TOUCH CONTROLS====
+        //todo: have the start touch point drag around with the finger if it gets too far away. this way it isn't hard to find center
+        if(touches.length > 0) {
+            for(touch in touches) {
+                //do stuff (? what was this for ?)
+            }
+        }
+        if(movement_touch != null) {
+            //todo: touch controls need tweaking. need to be able to move in cardinal directions easily
+            var touch_y = movement_touch.pos.y - movement_touch_initial_position.y;
+            var touch_x = movement_touch.pos.x - movement_touch_initial_position.x;
+            var angle = Math.atan2(touch_y, touch_x);
+            attached_entity.acceleration.x = ship_speed * Math.cos(angle);
+            attached_entity.acceleration.y = ship_speed * Math.sin(angle);
+            attached_entity.start_exhaust();
+            if(touches.length == 0) {
+                attached_entity.acceleration.x = 0;
+                attached_entity.acceleration.y = 0;
+                attached_entity.stop_exhaust();
+            } //stop ship
+        }
 
         //====KEY CONTROLS====
         if(Luxe.input.inputdown('up')) {
@@ -65,16 +89,31 @@ class Controls extends Component {
 
     override function ontouchdown( e:TouchEvent ) {
 
+        // portrait, one button controls
+        touches.push(e);
+        movement_touch = e;
+        movement_touch_initial_position = movement_touch.pos.clone();
 
     } //ontouchdown
 
     override function ontouchmove( e:TouchEvent ) {
 
+        for(touch in touches) {
+            if(touch.touch_id == e.touch_id) {
+                touch.pos.set_xy(e.pos.x, e.pos.y);
+            }
+        }
 
     } //ontouchmoved
 
     override function ontouchup( e:TouchEvent ) {
 
+        // portrait, one button controls
+        for(touch in touches) {
+            if(touch.touch_id == e.touch_id) {
+                touches.remove(touch);
+            }
+        }
 
     } //ontouchup
 
