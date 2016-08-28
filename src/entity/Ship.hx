@@ -15,7 +15,7 @@ class Ship extends Sprite {
 
     var max_velocity : Float = 10;
     var movement_rate : Float = 1.5;
-    
+
     var ship_exhaust_anim : SpriteAnimation;
     var ship_exhaust_anim_2 : SpriteAnimation;
 
@@ -31,6 +31,7 @@ class Ship extends Sprite {
         // add components
         add(new Controls());
         add(new ScrollingBackground());
+        //todo: add weapon component
 
         create_exhaust_animations();
 

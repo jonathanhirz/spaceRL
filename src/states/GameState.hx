@@ -45,6 +45,7 @@ class GameState extends State {
     function assets_loaded(_) {
 
         ship = new Ship();
+        //todo: new entity - asteroids, or something to shoot at
 
     } //assets_loaded
 
