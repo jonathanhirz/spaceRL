@@ -1,6 +1,10 @@
 package states;
 import luxe.States;
+import luxe.Screen;
+import luxe.Camera;
 import luxe.Color;
+import luxe.Vector;
+import luxe.Sprite;
 import luxe.Parcel;
 import luxe.ParcelProgress;
 
@@ -66,5 +70,12 @@ class GameState extends State {
         }
 
     } //update
+
+    override function onwindowsized( e:WindowEvent ) {
+
+        Luxe.camera.size = new Vector(Luxe.screen.w, Luxe.screen.h);
+        ship.pos = Luxe.screen.mid;
+
+    } //onwindowresized
 
 } //GameState

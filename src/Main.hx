@@ -2,10 +2,14 @@ import states.*;
 import luxe.GameConfig;
 import luxe.Input;
 import luxe.States;
+import luxe.Vector;
+import phoenix.Batcher;
+import phoenix.Camera;
 
 class Main extends luxe.Game {
 
     var machine : States;
+    public static var hud_batcher : Batcher;
 
     override function config( config:luxe.GameConfig ) {
 
@@ -26,6 +30,7 @@ class Main extends luxe.Game {
 
     override function ready() {
 
+        Luxe.camera.size = new Vector(Luxe.screen.w, Luxe.screen.h);
         connect_input();
         machine = new States({ name:'statemachine' });
         machine.add(new MenuState('menu_state'));
@@ -33,6 +38,13 @@ class Main extends luxe.Game {
         Luxe.on(init, function(_) {
             machine.set('game_state');
         });
+
+        // any controls/buttons/score text goes into this batcher so it won't move around the screen.
+        hud_batcher = new Batcher(Luxe.renderer, 'hud_batcher');
+        var hud_view = new Camera();
+        hud_batcher.view = hud_view;
+        hud_batcher.layer = 2;
+        Luxe.renderer.add_batch(hud_batcher);
 
     } //ready
 
@@ -61,5 +73,6 @@ class Main extends luxe.Game {
         Luxe.input.bind_key('space', Key.space);
 
     } //connect_input
+
 
 } //Main

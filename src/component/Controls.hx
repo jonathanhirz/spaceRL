@@ -15,11 +15,20 @@ class Controls extends Component {
     var touches : Array<TouchEvent>;
     var movement_touch : TouchEvent;
     var movement_touch_initial_position : Vector = new Vector(0,0);
+    var movement_touch_icon : Sprite;
 
     override function init() {
 
         attached_entity = cast entity;
         touches = [];
+
+        movement_touch_icon = new Sprite({ 
+            texture : Luxe.resources.texture('assets/movement_touch_icon.png'),
+            size : new Vector(64,64),
+            pos : new Vector(0,0),
+            visible : false,
+            batcher : Main.hud_batcher
+        });
 
     } //init
 
@@ -94,6 +103,10 @@ class Controls extends Component {
         movement_touch = e;
         movement_touch_initial_position = movement_touch.pos.clone();
 
+        // touch location indicator
+        movement_touch_icon.pos.set_xy(movement_touch.pos.x * Luxe.screen.w, movement_touch.pos.y * Luxe.screen.h);
+        movement_touch_icon.visible = true;
+
     } //ontouchdown
 
     override function ontouchmove( e:TouchEvent ) {
@@ -114,6 +127,9 @@ class Controls extends Component {
                 touches.remove(touch);
             }
         }
+
+        // touch location indicator
+        movement_touch_icon.visible = false;
 
     } //ontouchup
 
