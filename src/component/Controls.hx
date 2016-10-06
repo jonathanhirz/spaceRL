@@ -10,7 +10,7 @@ import entity.Ship;
 class Controls extends Component {
 
     var attached_entity : Ship;
-    var ship_speed : Float = 1.5;
+    var ship_speed : Float = 5.5;
 
     var touches : Array<TouchEvent>;
     var movement_touch : TouchEvent;
@@ -35,19 +35,18 @@ class Controls extends Component {
     override function update( dt:Float ) {
 
         //====TOUCH CONTROLS====
-        //todo: have the start touch point drag around with the finger if it gets too far away. this way it isn't hard to find center
         if(touches.length > 0) {
             for(touch in touches) {
                 //do stuff (? what was this for ?)
+                //todo: add fix for second touch breaking movement_touch
             }
         }
         if(movement_touch != null) {
-            //todo: touch controls need tweaking. need to be able to move in cardinal directions easily
             var touch_y = movement_touch.pos.y - movement_touch_initial_position.y;
             var touch_x = movement_touch.pos.x - movement_touch_initial_position.x;
-            var angle = Math.atan2(touch_y, touch_x);
-            attached_entity.acceleration.x = ship_speed * Math.cos(angle);
-            attached_entity.acceleration.y = ship_speed * Math.sin(angle);
+            attached_entity.acceleration.x = touch_x * ship_speed;
+            attached_entity.acceleration.y = touch_y * ship_speed;
+
             attached_entity.start_exhaust();
             if(touches.length == 0) {
                 attached_entity.acceleration.x = 0;

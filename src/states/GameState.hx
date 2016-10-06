@@ -9,6 +9,7 @@ import luxe.Parcel;
 import luxe.ParcelProgress;
 
 import entity.Ship;
+import entity.Asteroid;
 
 class GameState extends State {
 
@@ -27,7 +28,8 @@ class GameState extends State {
                 { id : 'assets/exhaust.png' },
                 { id : 'assets/star_background.png' },
                 { id : 'assets/star_background_back.png' },
-                { id : 'assets/movement_touch_icon.png' }
+                { id : 'assets/movement_touch_icon.png' },
+                { id : 'assets/asteroid.png' }
              ],
              jsons : [
                 { id : 'assets/exhaust.json'}
@@ -50,6 +52,8 @@ class GameState extends State {
 
         ship = new Ship();
         //todo: new entity - asteroids, or something to shoot at
+
+        var testteroid = new Asteroid(100,50);
 
     } //assets_loaded
 
