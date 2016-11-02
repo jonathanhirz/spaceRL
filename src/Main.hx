@@ -4,12 +4,13 @@ import luxe.Input;
 import luxe.States;
 import luxe.Vector;
 import phoenix.Batcher;
-import phoenix.Camera;
+import luxe.Camera;
 
 class Main extends luxe.Game {
 
     var machine : States;
     public static var hud_batcher : Batcher;
+    public static var hud_view : Camera;
 
     override function config( config:luxe.GameConfig ) {
 
@@ -41,9 +42,9 @@ class Main extends luxe.Game {
 
         // any controls/buttons/score text goes into this batcher so it won't move around the screen.
         hud_batcher = new Batcher(Luxe.renderer, 'hud_batcher');
-        var hud_view = new Camera();
-        //todo: fix rotation bug, change size of hud_view (camera) when rotating
-        hud_batcher.view = hud_view;
+        hud_view = new Camera();
+        hud_view.size = new Vector(Luxe.screen.w, Luxe.screen.h);
+        hud_batcher.view = hud_view.view;
         hud_batcher.layer = 2;
         Luxe.renderer.add_batch(hud_batcher);
 

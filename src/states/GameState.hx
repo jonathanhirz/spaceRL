@@ -7,6 +7,7 @@ import luxe.Vector;
 import luxe.Sprite;
 import luxe.Parcel;
 import luxe.ParcelProgress;
+import luxe.Text;
 
 import entity.Ship;
 import entity.Asteroid;
@@ -14,6 +15,7 @@ import entity.Asteroid;
 class GameState extends State {
 
     var ship : Ship;
+    var position_text : Text;
 
     public function new( _name:String ) {
         super({ name:_name });
@@ -53,7 +55,14 @@ class GameState extends State {
         ship = new Ship();
         //todo: new entity - asteroids, or something to shoot at
 
-        var testteroid = new Asteroid(100,50);
+        position_text = new Text({
+            text : "[X: " + Std.int(ship.pos.x) + ", Y: " + Std.int(ship.pos.y) + "]",
+            pos : new Vector(Luxe.screen.w/2, 30),
+            align : center,
+            batcher : Main.hud_batcher
+        });
+
+        var testteroid = new Asteroid(800,50);
 
     } //assets_loaded
 
@@ -69,15 +78,15 @@ class GameState extends State {
 
     override function update( dt:Float ) {
 
-        if(ship != null) {
-            Luxe.camera.center.weighted_average_xy(ship.pos.x, ship.pos.y, 1);
-        }
+        if(ship != null) Luxe.camera.center.weighted_average_xy(ship.pos.x, ship.pos.y, 1);
+        if(position_text != null) position_text.text = "[X: " + Std.int(ship.pos.x) + ", Y: " + Std.int(ship.pos.y) + "]";
 
     } //update
 
     override function onwindowsized( e:WindowEvent ) {
 
         Luxe.camera.size = new Vector(Luxe.screen.w, Luxe.screen.h);
+        Main.hud_view.size = new Vector(Luxe.screen.w, Luxe.screen.h);
         ship.pos = Luxe.screen.mid;
 
     } //onwindowresized

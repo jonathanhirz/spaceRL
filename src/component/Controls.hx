@@ -51,7 +51,7 @@ class Controls extends Component {
             if(touches.length == 0) {
                 attached_entity.acceleration.x = 0;
                 attached_entity.acceleration.y = 0;
-                attached_entity.stop_exhaust();
+                // attached_entity.stop_exhaust();
             } //stop ship
         }
 
