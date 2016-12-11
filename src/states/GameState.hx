@@ -34,7 +34,10 @@ class GameState extends State {
                 { id : 'assets/asteroid.png' }
              ],
              jsons : [
-                { id : 'assets/exhaust.json'}
+                { id : 'assets/exhaust.json' }
+            ],
+            fonts : [
+                { id : 'assets/inconsolata.fnt' }
             ]
         });
 
@@ -56,9 +59,9 @@ class GameState extends State {
         //todo: new entity - asteroids, or something to shoot at
 
         position_text = new Text({
-            text : "[X: " + Std.int(ship.pos.x) + ", Y: " + Std.int(ship.pos.y) + "]",
-            pos : new Vector(Luxe.screen.w/2, 30),
-            align : center,
+            font : Luxe.resources.font('assets/inconsolata.fnt'),
+            text : "X: " + Std.int(ship.pos.x/10) + "\nY: " + Std.int(-ship.pos.y/10),
+            pos : new Vector(20, 20),
             batcher : Main.hud_batcher
         });
 
@@ -79,7 +82,7 @@ class GameState extends State {
     override function update( dt:Float ) {
 
         if(ship != null) Luxe.camera.center.weighted_average_xy(ship.pos.x, ship.pos.y, 1);
-        if(position_text != null) position_text.text = "[X: " + Std.int(ship.pos.x) + ", Y: " + Std.int(ship.pos.y) + "]";
+        if(position_text != null) position_text.text = "X: " + Std.int(ship.pos.x/10) + "\nY: " + Std.int(-ship.pos.y/10);
 
     } //update
 

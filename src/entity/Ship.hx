@@ -25,7 +25,7 @@ class Ship extends Sprite {
             name : 'ship',
             texture : Luxe.resources.texture('assets/blue_ship.png'),
             size : new Vector(64, 64),
-            pos : Luxe.screen.mid
+            pos : new Vector(0, 0)
         });
 
         // add components
