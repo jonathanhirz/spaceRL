@@ -8,5 +8,4 @@ Space roguelike for mobile. Made with luxe engine
 * [ ] circular radar shows location of space stations
 * [ ] harder enemies carry locations for new space stations
 * [ ] continue to new areas to beat harder enemies, more 'bits' better weapons, etc
-* 
 * [ ] drop/start location is a larger ship/carrier. this sets the origin (0,0) for (x,y) coordinates (shown on screen)
